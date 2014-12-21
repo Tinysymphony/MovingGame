@@ -81,7 +81,8 @@ public class OnGame extends Activity implements OnTouchListener,OnClickListener 
 	private float speedX = 0, speedY = 0;
 	private SensorEventListener listener;
 
-	private ArrayMap arrayMap;
+	/////////////
+	private TinyMap arrayMap;
 
 	private TimerTask timerTask = new TimerTask(){
 		public void run(){
@@ -229,7 +230,7 @@ public class OnGame extends Activity implements OnTouchListener,OnClickListener 
 
 			}
 		};
-		TimerMove.schedule(moveTask, 25, 25);
+		TimerMove.schedule(moveTask, 8, 8);
 
 		NewLevel();
 
@@ -382,12 +383,12 @@ public class OnGame extends Activity implements OnTouchListener,OnClickListener 
 
 				case MOVE_IMAGE:
 					if((speedX > 0 && acceleratorX < 0) || (speedX < 0 && acceleratorX >0))
-						speedX -= 2*acceleratorX;
-					else speedX -= 0.1* acceleratorX;
+						speedX -= acceleratorX;
+					else speedX -= 0.5* acceleratorX;
 
 					if((speedY > 0 && acceleratorY < 0) || (speedY < 0 && acceleratorY >0))
-						speedY += 2*acceleratorY;
-					else speedY += 0.1 * acceleratorY;
+						speedY += acceleratorY;
+					else speedY += 0.5 * acceleratorY;
 
 					int dx = (int)(speedX * 0.05);
 					int dy = (int)(speedY * 0.05);
@@ -512,7 +513,7 @@ public class OnGame extends Activity implements OnTouchListener,OnClickListener 
 			return;
 		}
 		else
-			arrayMap = new ArrayMap((difficulty+1)*8,level++,b_size);;
+			arrayMap = new TinyMap((difficulty+1)*8,level++,b_size);;
 
 		removeImage();
 		putImage(b_size);

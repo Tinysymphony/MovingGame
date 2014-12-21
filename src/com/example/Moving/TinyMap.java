@@ -2,7 +2,6 @@ package com.example.Moving;
 
 
 import java.util.Random;
-
 import android.graphics.Point;
 
 public class TinyMap {
