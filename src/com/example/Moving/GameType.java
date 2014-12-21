@@ -80,9 +80,10 @@ public class GameType extends Activity {
         final ItemAdapter adapter=new ItemAdapter(GameType.this,R.layout.main_list_item, list);
         final ListView listView=(ListView)findViewById(R.id.main_list);
         listView.setAdapter(adapter);
-
         overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
+        list.clear();
         finish();
+
     }
 
     private void initList(){

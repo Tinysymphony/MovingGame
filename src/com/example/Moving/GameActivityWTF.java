@@ -31,7 +31,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class GameActivity extends Activity implements OnTouchListener {
+public class GameActivityWTF extends Activity implements OnTouchListener {
 
 //	private Map map;
 
@@ -142,7 +142,7 @@ public class GameActivity extends Activity implements OnTouchListener {
 
 		timer.schedule(timerTask, 1000,1000);
 
-		gameOver = new Builder(GameActivity.this);
+		gameOver = new Builder(GameActivityWTF.this);
 		gameOver.setTitle("Game T_T Over!");
 		gameOver.setCancelable(false);
 		gameOver.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
@@ -159,12 +159,11 @@ public class GameActivity extends Activity implements OnTouchListener {
 
 			@Override
 			public void onClick(DialogInterface gameOver, int which) {
-				finish();
-
+				onBackPressed();
 			}
 		});
 
-		nextLevel = new Builder(GameActivity.this);
+		nextLevel = new Builder(GameActivityWTF.this);
 		nextLevel.setTitle("Congratulations!^_^");
 		nextLevel.setCancelable(false);
 		nextLevel.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
@@ -172,15 +171,20 @@ public class GameActivity extends Activity implements OnTouchListener {
 			@Override
 			public void onClick(DialogInterface nextLevel, int which) {
 //				NewLevel();
+				SManager.registerListener(listener, sensor,SensorManager.SENSOR_DELAY_FASTEST);
 				MessageSend(RESET_TIME);
 //				BallStart();
 
 			}
 		});
-		nextLevel.setNegativeButton("Rest", new DialogInterface.OnClickListener() {
+		nextLevel.setNegativeButton("Reset", new DialogInterface.OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface nextLevel, int which) {
+				///////////////
+				Intent intent=new Intent(GameActivityWTF.this,MainList.class);
+				startActivity(intent);
+				overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
 				finish();
 			}
 		});
@@ -298,15 +302,6 @@ public class GameActivity extends Activity implements OnTouchListener {
 			int paddingTop=findViewById(R.id.title).getHeight()+10;
 			int paddingSide=10;
 			switch(msg.what){
-				case TIME_1S:
-					int timeLeft = Integer.parseInt(timeText.getText().toString()) - 1;
-					timeText.setText(Integer.toString(timeLeft));
-					if(timeLeft == 0){
-						timer.cancel();
-						gameOver.setMessage("Time is up! Again ?");
-						gameOver.show();
-					}
-					break;
 				case RESET_TIME:
 					timeText.setText("10");
 					timer = new Timer();
@@ -397,6 +392,10 @@ public class GameActivity extends Activity implements OnTouchListener {
 					break;
 
 				case NEXT_LEVEL:
+					SManager.unregisterListener(listener);
+					acceleratorX = acceleratorY = 0;
+					speedX = speedY =0;
+
 					nextLevel.show();
 					break;
 
@@ -419,7 +418,7 @@ public class GameActivity extends Activity implements OnTouchListener {
 	public void onBackPressed(){
 		Log.d(LOG_TAG, "onBackPressed");
 		soundPool.play(onClick, 1.0F, 1.0F, 0, 0, 1.0F);
-		Intent intent=new Intent(GameActivity.this,MainList.class);
+		Intent intent=new Intent(GameActivityWTF.this,MainList.class);
 		startActivity(intent);
 		overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
 		finish();
@@ -449,7 +448,7 @@ public class GameActivity extends Activity implements OnTouchListener {
 	public void Passed(){
 		//TODO:set animation and turn to the next stage if current level is not 6
 		LevelDatabaseHelper databaseHelper;
-		databaseHelper = new LevelDatabaseHelper(GameActivity.this,"LevelData",1);
+		databaseHelper = new LevelDatabaseHelper(GameActivityWTF.this,"LevelData",1);
 		SQLiteDatabase db;
 		db=databaseHelper.getReadableDatabase();
 		LevelDatabaseHelper.Unlock(db,0,0);

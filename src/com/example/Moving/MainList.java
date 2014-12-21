@@ -68,7 +68,8 @@ public class MainList extends Activity {
                     //Intent intent = new Intent(MainList.this, GameActivity.class);
                     Intent intent = new Intent(MainList.this, OnGame.class);
                     startActivity(intent);
-                    overridePendingTransition(R.anim.in_from_right,R.anim.out_to_left);
+                    overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+                    mainList.clear();
                     finish();
                 }
                 if(item.getName()==CHOOSE_STAGE) {
@@ -76,6 +77,7 @@ public class MainList extends Activity {
                     Intent intent = new Intent(MainList.this, ChooseStage.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.in_from_right,R.anim.out_to_left);
+                    mainList.clear();
                     finish();
                 }
                 if(item.getName()==DIFFICULTY) {
@@ -83,6 +85,7 @@ public class MainList extends Activity {
                     Intent intent = new Intent(MainList.this, Difficulty.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.in_from_right,R.anim.out_to_left);
+                    mainList.clear();
                     finish();
                 }
                 if(item.getName()==GAME_TYPE) {
@@ -90,6 +93,7 @@ public class MainList extends Activity {
                     Intent intent = new Intent(MainList.this, GameType.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.in_from_right,R.anim.out_to_left);
+                    mainList.clear();
                     finish();
                 }
                 if(item.getName()==SETTINGS) {
@@ -97,6 +101,7 @@ public class MainList extends Activity {
                     Intent intent = new Intent(MainList.this, Settings.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.in_from_right,R.anim.out_to_left);
+                    mainList.clear();
                     finish();
                 }
                 if(item.getName()==ABOUT_US) {
@@ -104,6 +109,7 @@ public class MainList extends Activity {
                     Intent intent = new Intent(MainList.this, AboutUs.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.in_from_right,R.anim.out_to_left);
+                    mainList.clear();
                     finish();
                 }
 
@@ -187,6 +193,7 @@ public class MainList extends Activity {
         dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                mainList.clear();
                 finish();
             }
         });

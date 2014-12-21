@@ -107,6 +107,8 @@ public class Difficulty extends Activity {
         Intent intent=new Intent(Difficulty.this,MainList.class);
         startActivity(intent);
         overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
+        list.clear();
         finish();
+
     }
 }

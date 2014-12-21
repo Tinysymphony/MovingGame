@@ -189,11 +189,11 @@ public class OnGame extends Activity implements OnTouchListener,OnClickListener 
 
 			}
 		});
-		nextLevel.setNegativeButton("Rest", new DialogInterface.OnClickListener() {
+		nextLevel.setNegativeButton("Back", new DialogInterface.OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface nextLevel, int which) {
-				finish();
+				onBackPressed();
 			}
 		});
 
@@ -468,6 +468,13 @@ public class OnGame extends Activity implements OnTouchListener,OnClickListener 
 //	    			db.execSQL("update levellock set lock=? where difficulty=? and level=?",
 //	    					new Object[]{0,difficulty,level+1});
 					LevelDatabaseHelper.Unlock(db,level,difficulty);
+///////////////////////////
+//				SManager.registerListener(listener, sensor, SensorManager.SENSOR_DELAY_FASTEST);
+					SManager.unregisterListener(listener);
+
+					acceleratorX = acceleratorY = 0;
+					speedX = speedY =0;
+
 					nextLevel.show();
 					break;
 				case BALL_START:
@@ -503,6 +510,10 @@ public class OnGame extends Activity implements OnTouchListener,OnClickListener 
 	public void NewLevel(){
 		Display display = getWindowManager().getDefaultDisplay();
 		Point size = new Point();
+///////////////////////////
+//		SManager.unregisterListener(listener);
+		SManager.registerListener(listener, sensor, SensorManager.SENSOR_DELAY_FASTEST);
+
 		display.getSize(size);
 		int width = size.x;
 		//int height = size.y;
