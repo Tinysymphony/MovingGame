@@ -4,7 +4,11 @@ package com.example.Moving;
 import java.util.Random;
 import android.graphics.Point;
 
-public class TinyMap {
+/**
+ * Created by ZJY on 12/19/14.
+ */
+
+public class GameMap {
 	private static final int line = 21;//行数
 	private static final int row = 16;//列数
 	
@@ -18,7 +22,7 @@ public class TinyMap {
 	
 	private int x0, y0;
 	
-	public TinyMap( int dif, int g,  int size)
+	public GameMap(int dif, int g, int size)
 	{
 		m = new  int[line][row];
 		start = new Point();

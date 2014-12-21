@@ -36,6 +36,10 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.*;
 
+/**
+ * Created by HLZ on 12/19/14.
+ */
+
 @SuppressLint("NewApi")
 public class OnGame extends Activity implements OnTouchListener,OnClickListener {
 
@@ -71,7 +75,8 @@ public class OnGame extends Activity implements OnTouchListener,OnClickListener 
 	private final static int NEXT_LEVEL = 7;
 	private final static int BALL_START = 8;
 
-	private int level = 0;
+	public static int level = 0;
+	public static boolean isNew= true;
 
 	private Builder gameOver ,nextLevel;
 
@@ -82,7 +87,7 @@ public class OnGame extends Activity implements OnTouchListener,OnClickListener 
 	private SensorEventListener listener;
 
 	/////////////
-	private TinyMap arrayMap;
+	private GameMap arrayMap;
 
 	private TimerTask timerTask = new TimerTask(){
 		public void run(){
@@ -519,12 +524,17 @@ public class OnGame extends Activity implements OnTouchListener,OnClickListener 
 		//int height = size.y;
 
 		int b_size =(int) ((20 * width  / 320)  * 0.9);//直接通过分辨率和bp算px
-		if(level==5){
-			Toast.makeText(OnGame.this, "You win!", Toast.LENGTH_SHORT).show();
-			return;
+
+		if(isNew) {
+			if (level == 5) {
+				Toast.makeText(OnGame.this, "You win!", Toast.LENGTH_SHORT).show();
+				return;
+			} else
+				arrayMap = new GameMap((difficulty + 1) * 8, level++, b_size);
+		}else {
+			arrayMap = new GameMap((difficulty + 1) * 8, level, b_size);
+			isNew=true;
 		}
-		else
-			arrayMap = new TinyMap((difficulty+1)*8,level++,b_size);;
 
 		removeImage();
 		putImage(b_size);

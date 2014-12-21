@@ -5,6 +5,10 @@ import java.util.Random;
 
 import android.graphics.Point;
 
+/**
+ * Created by ZJY on 12/19/14.
+ */
+
 public class ArrayMap {
 	private static final int line = 21;//行数
 	private static final int row = 16;//列数

@@ -78,20 +78,37 @@ public class ChooseStage extends Activity implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         if(!isLock(v)){
+            Intent intent=null;
             Log.v(LOG_TAG,"Start!");
+
             switch (v.getId()){
                 case R.id.button1:
-                    Intent intent=new Intent(ChooseStage.this,Stage1.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.roomin,R.anim.roomout);
+                    OnGame.level=0;
                     break;
-                case R.id.button2:break;
-                case R.id.button3:break;
-                case R.id.button4:break;
-                case R.id.button5:break;
-                case R.id.button6:break;
+                case R.id.button2:
+                    OnGame.level=1;
+                    break;
+                case R.id.button3:
+                    OnGame.level=2;
+                    break;
+                case R.id.button4:
+                    OnGame.level=3;
+                    break;
+                case R.id.button5:
+                    OnGame.level=4;
+                    break;
+                case R.id.button6:
+                    OnGame.level=5;
+                    break;
                 default:break;
             }
+
+            OnGame.isNew=false;
+            intent=new Intent(ChooseStage.this,OnGame.class);
+            if(intent!=null)
+                startActivity(intent);
+            overridePendingTransition(R.anim.roomin,R.anim.roomout);
+
         }else {
             Toast.makeText(this.getApplicationContext(), "You have not unlock the stage...", Toast.LENGTH_SHORT).show();
         }
